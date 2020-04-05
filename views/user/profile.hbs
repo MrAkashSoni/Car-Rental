@@ -15,7 +15,10 @@
     <input type="hidden" name="_csrf" value="{{ csrfToken }}">
 
     <input type="submit" value="Update Profile">
-    <a href="/user/changePassword">Change Password</a>
+    {{#if loggedInUser.googleID}}
+    {{else}}
+        <a href="/user/changePassword">Change Password</a>
+    {{/if}}
 </form>
 
 {{/if}}
