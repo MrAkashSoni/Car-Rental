@@ -22,6 +22,15 @@ var layoutRouter = require('./controller/layouts-controller');
 
 var app = express();
 
+mongoose.connect('mongodb+srv://Car-Rental:root@cluster0-mby8m.mongodb.net/car-rental_repo?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+}).then(() => {
+  console.log("cloud Connection Done");
+});
+
 mongoose.connect('mongodb://localhost:27017/car-rental_repo', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
