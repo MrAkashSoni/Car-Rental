@@ -1,0 +1,25 @@
+<h1>Login</h1>
+{{#if hasError}}
+    <div class="alert-danger">
+        {{#each messages}}
+            <p>{{this}}</p>
+        {{/each}}
+    </div>
+{{/if}}
+<div class="car-section row">  
+    <a href="/user/google">Login using Google</a>
+<form action="/user/login" method="POST">
+    <label for="name">Email</label>
+    <input type="email" placeholder="Enter Email Id" name="email"  class="form-control"><br>
+
+    <label for="name">Password</label>
+    <input type="password" placeholder="Enter Password" name="password"  class="form-control"><br><br>
+    
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+    <input type="submit" value="Login">
+    <a href="/user/verifyEmail">Forgotten Password.?</a>
+
+</form>
+
+</div>

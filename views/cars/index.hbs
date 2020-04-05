@@ -1,0 +1,51 @@
+<h2 class="home-title">Choose a car and rent it</h2>
+
+<form action="/searchingModel" method="GET" class="form-inline my-2 my-lg-0">
+  <fieldset>
+    <legend>Search by model</legend>
+    <input type="text" name="model" class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+    <input type="submit" class="btn btn-outline-success my-2 my-sm-0"><br>
+</fieldset>
+</form>
+
+<br><br><br><br><br><br>
+
+<ul class="pagination">
+  <li class="page-item"><a class="page-link" href="?page={{pageObj.prevPage}}">Prev page</a></li>
+  <li class="page-item" ><a class="page-link" href="?page={{pageObj.nextPage}}">Next page</a></li>
+</ul>
+
+{{#each cars}}
+  <div class="car-section row">      
+    <img class="home-page-imgages rounded float-left" src="/images/carImages/{{this.image}}">
+    <div class="col-md-2 col-sm12">
+      <h5>Model</h5>
+      <p>{{this.model}}</p><br>
+      <h5>Passing Number</h5>
+      <p>{{this.passingNumber}}</p>
+    </div>
+    <div class="col-md-2 col-sm12">
+      <h5>Price</h5>
+      <p><strong>₹</strong>{{this.price}}<strong><sub>/Day</sub></strong></p><br>
+      <h5>Car Type</h5>
+      <p>{{this.carType}}</p>
+    </div>
+    <div class="col-md-2 col-sm12">
+      <h5>Year</h5>
+      <p>{{this.year}}</p><br>
+      <h5>Fuel Type</h5>
+      <p>{{this.fuelType}}</p>
+    </div>
+    <div class="col-md-2 col-sm12">
+      <h5>Capacity</h5>
+      <p>{{this.capacity}}</p><br>
+      <h5>Transmission</h5>
+      <p>{{this.transmission}}</p><br>
+      <a href="/cars/carDetails/{{this._id}}"><b>RENT THIS CAR</b></a>
+    </div>
+  </div>
+{{/each}}
+<ul class="pagination">
+  <li class="page-item"><a class="page-link" href="?page={{pageObj.prevPage}}">Prev page</a></li>
+  <li class="page-item" ><a class="page-link" href="?page={{pageObj.nextPage}}">Next page</a></li>
+</ul>

@@ -1,0 +1,19 @@
+{{#if cartoUpdate}}
+{{!-- {{log cartoUpdate}} --}}
+<form action="/cars/editPrice" method="POST">
+  <fieldset>
+    <legend>{{cartoUpdate.model}} | {{cartoUpdate.passingNumber}}</legend>
+    
+    <label for="name">Price:</label>
+    <input type="text" value="{{cartoUpdate.price}}" name="price" class="form-control" required><br>
+
+    <label for="name">Image:</label>
+    <input type="file" name="image" class="form-control" required accept="jpg/png/jpeg"><br>
+
+    <input type="hidden" name="_id" value="{{cartoUpdate._id}}">
+    <input type="hidden" name="model" value="{{cartoUpdate.model}}">
+
+    <input type="submit" value="Update Price">
+  </fieldset>
+</form>
+{{/if}}

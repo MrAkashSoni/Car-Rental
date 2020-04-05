@@ -1,0 +1,60 @@
+
+#logout, #logout-form{
+  display: inline-block
+}
+.home-page-imgages{
+  width: 320px;
+}
+.car-section{
+  padding: 15px;
+  
+  box-shadow: 5px 5px 5px #888888;
+  border-radius: 25px;
+  margin-bottom: 20px;
+}
+.form-inline{
+  float: right;
+}
+.home-title{
+  display: inline-block;
+  margin-top: 50px
+}
+.container {
+padding: 6px;
+}
+
+form {
+width: 30%;
+margin-left: auto;
+margin-right: auto;
+}
+
+input[type=text], input[type=password] {
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+input[type=submit] {
+background-color: #343a40;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+cursor: pointer;
+width: 100%;
+}
+
+input[type=submit]:hover {
+opacity: 0.9;
+}
+
+img {
+  border: 1px solid #343a40;
+  border-radius: 5%;
+  width: 100%;
+}

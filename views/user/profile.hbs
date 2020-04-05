@@ -1,0 +1,22 @@
+<h1>User Profile {{curHashPass}}</h1>
+{{#if loggedInUser}}
+<div class="car-section row">      
+<form action="/user/editProfile" method="post">
+    <label for="first_name">First name</label>
+    <input type="text" id="firstName" value="{{loggedInUser.firstName}}" name="firstName" class="form-control"><br>
+
+    <label for="last_name">Last name</label>
+    <input type="text" id="lastName" value="{{loggedInUser.lastName}}" name="lastName" class="form-control" ><br>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" value="{{loggedInUser.email}}" name="email" class="form-control" readonly><br>
+
+    <input type="hidden" name="_id" value="{{loggedInUser._id}}">
+    <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+
+    <input type="submit" value="Update Profile">
+    <a href="/user/changePassword">Change Password</a>
+</form>
+
+{{/if}}
+</div>

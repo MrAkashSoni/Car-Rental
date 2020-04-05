@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="views\layouts\layout.hbs" rel="Stylesheet"
+        type="text/css" />
+</head>
+
+<h1>{{foundCar.model}}</h1>
+
+<br> <br>
+ <div class="car-section row">      
+        <div class="col-md-6 col-sm12">
+                <p><img src="/images/carImages/{{foundCar.image}}"></p>
+        </div>
+        
+        <br><br>
+        {{!-- <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
+            {{errMsg}}
+        </div> --}}
+        <form action="/cars/carDetails" method="POST" id="rentCar-form" enctype="multipart/form-data">
+                <fieldset>        
+                <legend>Date of rent:</legend>
+                <input type="text" id="txtdate" name="dateOfRental" class="form-control" required>    
+                <legend>Days of rental:</legend>
+                <input type="number" name="daysOfRental" class="form-control" min="1" required>
+                <legend>Upload Your Licence:</legend>
+                <input type="file" name="licence" class="form-control" required accept="jpg/png/jpeg"><br>
+                <legend>Card Holder Name:</legend>
+                <input type="text" name="cardHolderName" id="cardHolderName" class="form-control" required>
+                <legend>Card Number:</legend>
+                <input type="text" name="cardNumber" id="cardNumber" class="form-control" required>
+                <legend>Expiry Month:</legend>
+                <input type="number" name="expiryMonth" id="expiryMonth" class="form-control" required>
+                <legend>Expiry Year:</legend>
+                <input type="number" name="expiryYear" id="expiryYear" class="form-control" required>
+                <legend>CVV Number:</legend>
+                <input type="number" name="cvvNumber" id="cvvNumber" class="form-control" required>
+                <input type="text" name="carId" value="{{foundCar._id}}" style="display:none"><br><br>
+                {{!-- <input type="submit" value="RENT NOW"> --}}
+                <button type="submit" class="btn btn-success">RENT NOW</button>
+                </fieldset>
+        </form>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="/javascripts/rentCar.js"></script>
