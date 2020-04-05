@@ -164,7 +164,10 @@ router.post('/login', auth.notLoggedIn, passport.authenticate('local.login', {
 }));
 
 router.get('/google', passport.authenticate('google', {
-    scope: ['profile']
+    scope: [
+        'https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email'
+    ]
 }));
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
