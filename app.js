@@ -28,15 +28,21 @@ mongoose.connect('mongodb+srv://Car-Rental:root@cluster0-mby8m.mongodb.net/car-r
   useCreateIndex: true,
   useFindAndModify: false
 }).then(() => {
-  console.log("Connection Done");
+  console.log("1. Connection Done");
 });
+// mongoose.connect('mongodb+srv://Car-Rental:root@cluster0-mby8m.mongodb.net/car-rental_repo?retryWrites=true&w=majority', function(error) {
+//   // if error is truthy, the initial connection failed.
+//   console.log(error);
+// })
 
-mongoose.connect('mongodb://localhost:27017/car-rental_repo', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false
-});
+// mongoose.connect('mongodb://localhost:27017/car-rental_repo', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true,
+//   useFindAndModify: false
+// }).then(() => {
+//   console.log("2. Connection Done");
+// });
 
 // view engine setup
 app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
