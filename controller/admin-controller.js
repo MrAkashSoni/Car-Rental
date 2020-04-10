@@ -12,7 +12,7 @@ router.get('/addCar', auth.isAdmin ,function(req, res, next) {
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'C:/Users/akash/Desktop/projects/car-rental/public/images/carImages');
+      cb(null, 'public/images/carImages');
     },
     filename: function (req, file, cb) {
       cb(null,req.body.model + "_" + req.body.passingNumber + path.extname(file.originalname));

@@ -3,7 +3,7 @@ Stripe.setPublishableKey('pk_test_foVqYU0PFIKrjh2l2jhygzPc00sX05TcUo');
 var $form = $('#rentCar-form');
 
 $form.submit(function (event) {
-    // $('#charge-error').addClass('hidden');
+    $('#charge-error').addClass('hidden');
     $form.find('button').prop('disabled', true);
     Stripe.card.createToken({
         number: $('#cardNumber').val(),
@@ -26,6 +26,7 @@ function stripeResponseHandler(status, response) {
         var token = response.id;
         // Insert the token into the form so it gets submitted to the server:
         $form.append($('<input type="hidden" name="stripeToken" />').val(token));
+        console.log(token);
         // Submit the form:
         $form.get(0).submit();
     }

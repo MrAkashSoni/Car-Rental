@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    
+</head>
+<body>
+<h1>{{carId.model}}</h1>
+
+<br> <br>
+ <div class="car-section row">      
+        <div class="col-md-6 col-sm12">
+                <p><img src="/images/carImages/{{carId.image}}"></p>
+        </div>
+        
+        <br><br>
+        <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
+            {{errMsg}}
+        </div>
+         <form action="/cars/bookingDetails" method="POST">
+                <fieldset>        
+                <legend>Date of rent:</legend>
+                <input type="text" id="txtdate" name="dateOfRental" class="form-control" required>    
+                <legend>Days of rental:</legend>
+                <input type="number" name="daysOfRental" class="form-control" min="1" required>               
+                <input type="hidden" name="carId" value="{{carId}}" >
+                <button type="submit" class="btn btn-success">PAY NOW</button>
+                </fieldset>
+        </form>
+</div>
+
+</body>

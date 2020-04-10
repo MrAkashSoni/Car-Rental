@@ -7,6 +7,26 @@ var multer = require('multer');
 var path = require('path');
 var auth = require('../config/auth');
 
+router.get('/allCars', function(req, res, next) {
+    let page = Number(req.query.page)
+    if(Object.keys(req.query).length === 0){
+        page = 0
+    }
+    console.log(req.query)
+    let prevPage = page - 1
+    let nextPage = page + 1
+    Car.find({}).where('isRented').equals(false).sort({ year: -1 }).skip(page * 5).limit(5).then(cars => {
+
+    if (prevPage < 0) prevPage = 0
+
+    let pageObj = {
+        prevPage: prevPage,
+        nextPage: nextPage
+    }
+      res.render('cars/allCars', { title:"Car Rental", cars, pageObj })
+  })
+});
+
 router.get('/carDetails/:id', function(req, res, next) {
     let id = req.params.id
     Car.findById(id).then(foundCar => {
@@ -14,9 +34,28 @@ router.get('/carDetails/:id', function(req, res, next) {
     })
 });
 
+router.get('/bookingDetails/:id',auth.isLoggedIn, function(req, res, next) {
+    let carId = req.params.id
+    // var carId = req.body.carId;
+    console.log("39" + carId);
+    res.render('cars/bookingDetails', {carId});
+});
+
+router.post('/bookingDetails',auth.isLoggedIn, function(req, res, next) {
+    let id = req.body.carId;
+    let userId = req.user._id;   
+    var date = req.body.dateOfRental;
+    var days = req.body.daysOfRental;
+    var rentAmount = 0;
+    Car.findById(id).then(doc => {
+        rentAmount = doc.price * days;
+        res.render('cars/paymentDetails', {id, userId,date, days, rentAmount });
+    })
+});
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'C:/Users/akash/Desktop/projects/car-rental/public/images/licenceImages');
+      cb(null, 'public/images/licenceImages');
     },
     filename: function (req, file, cb) {
       cb(null,req.user._id + path.extname(file.originalname));
@@ -24,9 +63,11 @@ var storage = multer.diskStorage({
   });
 var upload = multer({ storage:storage});
 
-router.post('/carDetails',auth.isLoggedIn, upload.single('licence'), function(req, res, next) {
-    let id = req.body.carId
-    let userId = req.user._id   
+router.post('/paymentDetails',auth.isLoggedIn, upload.single('licence'),  function(req, res, next) {
+    let id = req.body.id;
+    let userId = req.user._id;   
+    var date = req.body.date;
+    var days = req.body.days;
     let RentedCarInfoObj = {}   
 
     var stripe = require('stripe')
@@ -34,7 +75,7 @@ router.post('/carDetails',auth.isLoggedIn, upload.single('licence'), function(re
 
     stripe.charges.create(
     {
-        amount: 2000,
+        amount: req.body.rentAmount,
         currency: 'inr',
         source: req.body.stripeToken,
         description: 'Test Charge',
@@ -42,7 +83,7 @@ router.post('/carDetails',auth.isLoggedIn, upload.single('licence'), function(re
     function(err, charge) {
         if (err){
             console.log(err.message);
-            return res.render('cars/carDetails');
+            return res.render('cars/paymentDetails');
         }
         Car.findById(id).then(foundCar => {
             User.findById(userId).then(user => {
@@ -53,8 +94,8 @@ router.post('/carDetails',auth.isLoggedIn, upload.single('licence'), function(re
                         RentedCarInfoObj={
                             car: foundCar._id,
                             user: userId,
-                            date: req.body.dateOfRental,
-                            days: req.body.daysOfRental,
+                            date: date,
+                            days: days,
                             licence: req.file.filename,
                             paymentID : charge.id
                         }
@@ -78,7 +119,7 @@ router.get('/editPrice/:id', auth.isLoggedIn, auth.isAdmin ,function(req, res, n
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'C:/Users/akash/Desktop/projects/car-rental/public/images/carImages');
+      cb(null, 'public/images/carImages');
     },
     filename: function (req, file, cb) {
       cb(null,req.body.model+"_"+Date.now() + path.extname(file.originalname));

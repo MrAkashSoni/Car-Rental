@@ -1,0 +1,29 @@
+<body>
+<form action="/cars/paymentDetails" method="POST" id="rentCar-form" enctype="multipart/form-data">
+                <fieldset>      
+                {{!-- <input type="hidden" name="bookingDetails" value="{{bookingDetails}}" > --}}
+                <input type="hidden" name="userId" value="{{userId}}" >
+                <input type="hidden" name="date" value="{{date}}" >
+                <input type="hidden" name="days" value="{{days}}" >
+                <input type="hidden" name="rentAmount" value="{{rentAmount}}" >
+                <input type="text" name="carId" value="{{foundCar._id}}" style="display:none">  
+                <legend>Card Holder Name:</legend>
+                <input type="text" name="cardHolderName" id="cardHolderName" class="form-control" required>
+                <legend>Card Number:</legend>
+                <input type="text" name="cardNumber" id="cardNumber" class="form-control" required>
+                <legend>Expiry Month:</legend>
+                <input type="number" name="expiryMonth" id="expiryMonth" class="form-control" required>
+                <legend>Expiry Year:</legend>
+                <input type="number" name="expiryYear" id="expiryYear" class="form-control" required>
+                <legend>CVV Number:</legend>
+                <input type="number" name="cvvNumber" id="cvvNumber" class="form-control" required>
+                <legend>Upload Your Licence:</legend>
+                <input type="file" name="licence" class="form-control" required accept="jpg/png/jpeg"><br>
+                {{!-- <button type="submit" class="btn btn-success">RENT NOW</button> --}}
+                <input type="submit" value="pay">
+                {{!-- <button type="submit" class="btn btn-success">PAY</button> --}}
+                </fieldset>
+</form>
+</body>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script src="/javascripts/rentCar.js"></script>
