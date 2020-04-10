@@ -64,7 +64,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage:storage});
 
 router.post('/paymentDetails',auth.isLoggedIn, upload.single('licence'),  function(req, res, next) {
-    let id = req.body.id;
+    let id = req.body.carId;
     let userId = req.user._id;   
     var date = req.body.date;
     var days = req.body.days;
@@ -101,7 +101,7 @@ router.post('/paymentDetails',auth.isLoggedIn, upload.single('licence'),  functi
                         }
                         console.log(RentedCarInfoObj)
                         RentedCarInfo.create(RentedCarInfoObj).then(()=>{
-                            res.redirect('/')
+                            res.redirect("/");
                         })
                     })
                 })
