@@ -83,7 +83,7 @@ router.post('/paymentDetails',auth.isLoggedIn, upload.single('licence'),  functi
     function(err, charge) {
         if (err){
             console.log(err.message);
-            return res.render('cars/paymentDetails');
+            return res.render('cars/paymentDetails', {err});
         }
         Car.findById(id).then(foundCar => {
             User.findById(userId).then(user => {
