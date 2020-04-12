@@ -15,7 +15,7 @@ router.get('/allCars', function(req, res, next) {
     console.log(req.query)
     let prevPage = page - 1
     let nextPage = page + 1
-    Car.find({}).where('isRented').equals(false).sort({ year: -1 }).skip(page * 5).limit(5).then(cars => {
+    Car.find({}).where('isRented').equals(false).sort({ year: -1 }).skip(page * 6).limit(6).then(cars => {
 
     if (prevPage < 0) prevPage = 0
 
