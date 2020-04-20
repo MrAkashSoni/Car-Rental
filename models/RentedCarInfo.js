@@ -6,7 +6,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 const rentedCarSchema = new mongoose.Schema({
     car: { type: ObjectId, required: true, ref: 'Car' },
     user: { type: ObjectId, required: true, ref: 'User' },
-    date: { type: Date, required: true },
+    date: { type:  Date, required: true },
     days: { type: Number, required: true },
     licence: { type: mongoose.Schema.Types.String, required: true },
     paymentID: { type: mongoose.Schema.Types.String, required: true }

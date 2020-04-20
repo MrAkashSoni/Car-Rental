@@ -32,7 +32,7 @@ router.post('/addCar', auth.isAdmin, upload.single('image'), function(req, res, 
         passingNumber:  req.body.passingNumber,
         capacity: req.body.capacity,
         transmission: req.body.transmission,
-        creationDate: Date.now(),
+        creationDate: new Date("<YYYY-mm-dd>").now(),
         ownerID: currentUser._id
     };
     

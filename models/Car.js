@@ -13,7 +13,7 @@ const carSchema = new mongoose.Schema({
     transmission: { type: mongoose.Schema.Types.String, required: true},
     passingNumber: { type: mongoose.Schema.Types.String, required: true},
     isRented: {type: Boolean, required: true, default: false},
-    creationDate: {type: Date, required:true},
+    creationDate: {type:  Date, required:true},
     ownerID: { type: ObjectId, ref: 'User'}
 })
 

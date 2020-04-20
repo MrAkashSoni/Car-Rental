@@ -20,6 +20,7 @@
     "express-passport": "^0.1.0",
     "express-session": "^1.17.0",
     "express-validator": "^6.4.0",
+    "handlebars": "^4.5.3",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
     "mongoose": "^5.9.1",
