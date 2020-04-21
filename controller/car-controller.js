@@ -36,8 +36,6 @@ router.get('/carDetails/:id', function(req, res, next) {
 
 router.get('/bookingDetails/:id',auth.isLoggedIn, function(req, res, next) {
     let carId = req.params.id
-    // var carId = req.body.carId;
-    console.log("39" + carId);
     res.render('cars/bookingDetails', {carId});
 });
 
@@ -47,9 +45,16 @@ router.post('/bookingDetails',auth.isLoggedIn, function(req, res, next) {
     var date = req.body.dateOfRental;
     var days = req.body.daysOfRental;
     var rentAmount = 0;
+
+    // RentedCarInfo.findById(id).then(doc => {
+    //     if (doc.date = { $gte:ISODate(date), $lt:ISODate(date + days)}) {
+    //         console.log("Car not available")
+    //     }
+    // })
+    
     Car.findById(id).then(doc => {
         rentAmount = doc.price * days;
-        res.render('cars/paymentDetails', {id, userId,date, days, rentAmount });
+        res.render('cars/paymentDetails', {id, userId, date, days, rentAmount});
     })
 });
 

@@ -6,7 +6,7 @@ var auth = require('../config/auth');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log(Date.now());
-    Car.find({}).where('isRented').equals(false).limit(3).then(cars => {
+    Car.find({}).where('isRented').equals(false).limit(6).then(cars => {
         res.render('layouts/index', { title:"Car Rental", cars })
       })
 });
