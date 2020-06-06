@@ -59,11 +59,6 @@ app.use(session({
   cookie: { maxAge : 180 * 60 * 1000 }
 }));
 
-// app.use(cookieSession({
-//   maxAge: 24 * 60 * 60 * 1000,
-//   keys: ['asdfghjkl']
-// }));
-
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());

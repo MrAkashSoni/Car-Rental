@@ -3,6 +3,16 @@ var User =  require('../models/User');
 var LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('./keys');
+var rn = require('random-number');
+var nodemailer = require('nodemailer');
+var session = require('express-session');
+
+var gen = rn.generator({
+    min:  0,
+    max:  99999999,
+    integer: true
+  })
+let randNum = gen(); 
 
 passport.serializeUser(function (user, done) {
     done(null, user.id);
@@ -43,7 +53,7 @@ passport.use(
     })
 );
 
-passport.use('local.registration', new LocalStrategy({
+passport.use('local.register', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
@@ -69,7 +79,7 @@ passport.use('local.registration', new LocalStrategy({
            }
            return done(null, newUser);
         });
-    });
+     });
 }));
 
 

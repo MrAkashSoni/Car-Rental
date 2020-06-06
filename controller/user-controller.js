@@ -52,14 +52,14 @@ router.get('/verifyEmail', auth.notLoggedIn, function(req, res, next) {
 
 router.post('/verifyEmail', auth.notLoggedIn, function(req, res, next) {   
     
-     var mailOptions, host, link;
-        var smtpTransport = nodemailer.createTransport({
-            service: "Gmail",
-            auth: {
-                user: keys.gmail.id,
-                pass: keys.gmail.password
-            }
-        });
+    var mailOptions, host, link;
+    var smtpTransport = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: keys.gmail.id,
+            pass: keys.gmail.password
+        }
+    });
 
         host = req.get('host');
         link = "http://" + req.get('host') + "/user/forgotPassword/" + randNum;
@@ -144,9 +144,55 @@ router.use('/', auth.notLoggedIn, function(req, res, next) {
 router.get('/registration', auth.notLoggedIn, function(req, res, next) {
     var messages = req.flash('error');
     res.render('user/registration', { messages: messages, hasError: messages.length > 0})
-  });
+});
 
-router.post('/registration', auth.notLoggedIn, passport.authenticate('local.registration', {
+router.post('/registration', auth.notLoggedIn, function(req, res, next) {
+    var mailOptions, host, link;
+        var smtpTransport = nodemailer.createTransport({
+            service: "Gmail",
+            auth: {
+                user: keys.gmail.id,
+                pass: keys.gmail.password
+            }
+        });
+        link = "http://" + req.get('host') + "/user/verifiedAccount/" + randNum;
+        req.session.randNum = randNum;     
+            User.findOne({email : req.body.email}, function(err,doc){
+            if (err) {
+                return done(err);
+            }
+            if (doc) {
+                res.render('user/Registration', {errMsg: "Email is already in use."});
+            }
+        });
+                req.session.userEmail =  req.body.email;
+                mailOptions = {
+                    to :  req.body.email,
+                    subject : "Verify Account",
+                    html : "Hello,<br> Please Click on the link to verify your account.<br><a href="+link+">Click here to Verify</a>"
+                }
+                console.log(mailOptions);
+                smtpTransport.sendMail(mailOptions, function(error, response){
+                if(error) {
+                    console.log(error);
+                    res.send(error);
+                }
+                else {
+                    res.render('user/Registration', {errMsg: "click on the link sent to your email id to verify your account" });
+                    JSON.send("Invalid EmailID");
+                    console.log("Message sent: " + response.message);
+                }
+            });  
+});
+
+router.get('/verifiedAccount/:id', auth.notLoggedIn, function(req, res, next) {
+    if (req.session.randNum == req.params.id)
+        res.render('user/register' , {userEmail : req.session.userEmail});
+    else    
+        res.render('user/Registration', {errMsg: "User isn't verified" });
+});
+
+router.post('/register', auth.notLoggedIn, passport.authenticate('local.register', {
     successRedirect: '/',
     failureRedirect: '/user/registration',
     failureFlash: true

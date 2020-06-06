@@ -28,13 +28,28 @@
     <section class="ftco-section contact-section">
       <div class="container">
           <div class="col-md-8 block-9 mb-md-5">
-              <form action="/user/registration" method="post">
+              <form action="/user/register" method="post">
               <div class="form-group">
-                <input type="text"  id="email" class="form-control" name="email" placeholder="Your Email">
+                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Your First Name">
               </div>
               <div class="form-group">
-                  <input type="submit" value="Verify Your Account" class="btn btn-primary py-3 px-5">
+                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Your Last Name">
               </div>
+              <div class="form-group">
+                <input type="text"  id="email" class="form-control"  value = "{{userEmail}}" name="email" placeholder="Your Email" readonly>
+              </div>
+              <div class="form-group">
+                <input type="password" id="password" class="form-control" name="password" placeholder="Your Password">
+              </div>
+             
+                {{#if isAdmin}}
+                    <input type="hidden" name="isAdmin" value="true">
+                {{else}}
+                    <a href="/user/subAdmin-registration">Make Money From your ideal Car!</a>
+                {{/if}}
+                <div class="form-group">
+                    <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
+                </div>
             </form>
           </div>
       </div>
