@@ -1,4 +1,6 @@
-<html>
+<html> 
+	<input type="hidden" name="token" id="token" value="{{token}}">
+
 <div class="hero-wrap ftco-degree-bg" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -154,4 +156,20 @@
         </div>
     	</div>
     </section>	
-</html
+</html>
+
+	<script>
+// Check browser support
+
+console.log("token 9" );
+if (typeof(Storage) !== "undefined") {
+  // Store
+  <h1 id = "vjnd">document.getElementById('token')</h1>
+  var token = document.getElementById('token');
+  console.log("token 9" + token);
+	var t = token.toString();
+  localStorage.setItem("token", JSON.stringify(t));
+} else {
+  document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+</script>

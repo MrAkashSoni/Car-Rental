@@ -110,17 +110,8 @@ passport.use('local.login', new LocalStrategy({
                 expiresIn: "1h"
             }
         );
-        console.log("token" + token);
-        localStorage['myToken'] = "token";
-        localStorage.myToken = "token";
-        localStorage['myToken'] = token;
-        localStorage.myToken = token;
-        // var localStorage = require('localStorage')
-        // myToken = { token: token };
-        // localStorage.setItem('myKey', JSON.stringify(myToken));
-        // localStorage.setItem('token', token);
         req.session.userToken = token;
-        // console.log("token " + token);
+        console.log("token" + req.session.userToken);
         return done(null, user, {token: token});
     });
 }));
