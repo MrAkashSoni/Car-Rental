@@ -6,6 +6,8 @@ const keys = require('./keys');
 var rn = require('random-number');
 var nodemailer = require('nodemailer');
 var session = require('express-session');
+const jwt = require('jsonwebtoken');
+const localStorage = require('node-localstorage');
 
 var gen = rn.generator({
     min:  0,
@@ -99,6 +101,26 @@ passport.use('local.login', new LocalStrategy({
         if (!user.validPassword(password)) {
             return done(null, false, {message: 'Wrong password.'});
         }
-        return done(null, user);
+        const token = jwt.sign(
+            {
+                email : email
+            },
+            keys.jwt.key, 
+            {
+                expiresIn: "1h"
+            }
+        );
+        console.log("token" + token);
+        localStorage['myToken'] = "token";
+        localStorage.myToken = "token";
+        localStorage['myToken'] = token;
+        localStorage.myToken = token;
+        // var localStorage = require('localStorage')
+        // myToken = { token: token };
+        // localStorage.setItem('myKey', JSON.stringify(myToken));
+        // localStorage.setItem('token', token);
+        req.session.userToken = token;
+        // console.log("token " + token);
+        return done(null, user, {token: token});
     });
 }));

@@ -12,6 +12,7 @@ var flash = require('connect-flash');
 var mongoStore = require('connect-mongo')(session);
 const cookieSession = require('cookie-session');
 require('./config/passport');
+const keys = require('./config/keys');
 
 // Controller setup
 var indexRouter = require('./controller/index-controller');
@@ -22,7 +23,7 @@ var layoutRouter = require('./controller/layouts-controller');
 
 var app = express();
 
-mongoose.connect('mongodb+srv://Car-Rental:root@cluster0-mby8m.mongodb.net/car-rental_repo?retryWrites=true&w=majority', {
+mongoose.connect(keys.mongodb.dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
