@@ -7,8 +7,13 @@ var rn = require('random-number');
 var nodemailer = require('nodemailer');
 var session = require('express-session');
 const jwt = require('jsonwebtoken');
-const localStorage = require('node-localstorage');
+// const store = require('local-storage-pro')
+// const SafeStorage =  require('safer-web-storage')
+// const WebStorageES6 = require('web-storage-es6');
 
+// const localStorage = require('node-localstorage');
+// var localStorage = require('web-storage')().localStorage;
+// localStorage.set('boo', 5);
 var gen = rn.generator({
     min:  0,
     max:  99999999,
@@ -110,8 +115,46 @@ passport.use('local.login', new LocalStrategy({
                 expiresIn: "1h"
             }
         );
-        req.session.userToken = token;
-        console.log("token" + req.session.userToken);
+        // console.log("Passport 115");
+        
+ 
+// const safeLocalStorage = SafeStorage.createSafeLocalStorage()
+// const safeSessionStorage = SafeStorage.createSafeSessionStorage()
+ 
+// safeLocalStorage.getItem('apples')
+// safeSessionStorage.seItem('pineapples', 20)
+        // store.setItem('name', 'Murat')
+//         var localStorage = new WebStorageES6('Local');
+//         var sessionStorage = new WebStorageES6('Session');
+//         var customGlobalStorage = new WebStorageES6('Global', 'custom');
+// // Sets 'var1' to 'value1'
+// localStorage.put('var1', 'value1');
+// // Gets 'var1'
+// localStorage.get('var1');
+// console.log("Passport 124")
+
+        // var localStorage = require('web-storage')({
+        //     parse: function() {return 'idk';}
+        //   }).localStorage;
+         
+        // localStorage.set('foo', 5);
+        // window.localStorage.foo;//equals 'idk'
+        // req.session.userToken = token;
+        // console.log("token" + req.session.userToken);
+
+        // var season = localStorage.setItem( req.session.userToken);
+        // $.parseJSON(season);
+     
+        // if (typeof localStorage === "undefined" || localStorage === null) {
+        // var LocalStorage = require('node-localstorage').LocalStorage;
+        // localStorage = new LocalStorage('./scratch');
+        // }
+        // localStorage.setItem('myFirstKey', token);
+        // console.log(localStorage.getItem('myFirstKey'));
+        // var t = token.toString();
+        // localStorage.setItem("token", JSON.stringify(t));
+        // document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+      
         return done(null, user, {token: token});
     });
 }));

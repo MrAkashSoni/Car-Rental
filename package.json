@@ -24,6 +24,7 @@
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
+    "local-storage-pro": "^1.1.1",
     "localstorage": "^1.0.1",
     "mongoose": "^5.9.1",
     "morgan": "~1.9.1",
@@ -36,6 +37,9 @@
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "random-number": "0.0.9",
-    "stripe": "^8.24.0"
+    "safer-web-storage": "^1.1.0",
+    "stripe": "^8.24.0",
+    "web-storage": "^1.0.0",
+    "web-storage-es6": "^1.2.0"
   }
 }
