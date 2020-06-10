@@ -1,5 +1,6 @@
 <html> 
-	<body onload="loadToken()"> 
+	<body onload="generateToken()">
+		<input type="hidden" value="{{token}}" id="token"> 
 	{{!-- <input type="text" name="token" id="token" value="{{token}}" > --}}
 <div class="hero-wrap ftco-degree-bg" style="background-image: url('/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
@@ -17,35 +18,6 @@
     <section class="ftco-section ftco-no-pt bg-light">
     	<div class="container">
     		<div class="row justify-content-center">
-          {{!-- <div class="col-md-12 heading-section text-center ftco-animate mb-5">
-          	<span class="subheading">What we offer</span>
-            <h2 class="mb-2">Featured Vehicles</h2>
-          </div>
-        	</div>
-    		<div class="row">
-    			<div class="col-md-12">
-    				<div class="carousel-car owl-carousel">
-    					<div class="item">
-							{{#each cars}}
-    						<div class="car-wrap rounded ftco-animate">
-		    					<div class="img rounded d-flex align-items-end" style='background-image: url("/images/carImages/{{this.image}}");'>
-		    					</div>
-								
-		    					<div class="text">
-		    						<h2 class="mb-0"><a href="#">{{this.model}}</a></h2>
-		    						<div class="d-flex mb-3">
-			    						<span class="cat">{{this.model}}</span>
-			    						<p class="price ml-auto">₹ {{this.price}} <span>/day</span></p>
-		    						</div>
-		    						<p class="d-flex mb-0 d-block"><a href="/cars/carDetails/{{this._id}}" class="btn btn-primary py-2 mr-1">Book now</a>
-									<a href="/cars/carDetails/{{this._id}}" class="btn btn-secondary py-2 ml-1">Details</a></p>
-		    					</div>
-		    				</div>
-							{{/each}}
-    					</div>
-    				</div>
-    			</div>
-    		</div> --}}
     	</div>
     </section>
 
@@ -156,21 +128,12 @@
         </div>
     	</div>
     </section>	
+	<script>
+		function generateToken() {
+			var t = document.getElementById("token").value;
+			document.getElementById("token").innerHTML = t;
+			localStorage.setItem('myToken', t);
+		}
+	</script>
 	</body>
 </html>
-
-<script>
-function loadToken() {
-console.log("token ********************************" );
-if (typeof(Storage) !== "undefined") {
-  // Store
-  var token = document.getElementById('token');
-  console.log("token " + token);
-	var t = token.toString();
-  localStorage.setItem("token", JSON.stringify(t));
-} else {
-  document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-}
-}
-
-</script>
