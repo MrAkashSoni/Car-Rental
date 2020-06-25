@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-    {{#if hasError}}
-    <div class="alert-danger">
-        {{#each messages}}
-            <p>{{this}}</p>
-        {{/each}}
-    </div>
-    {{/if}}
+    
     <section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url('/images/bg_3.jpg');" data-stellar-background-ratio="0.5">
       <div class="overlay"></div>
       <div class="container">
@@ -19,7 +13,13 @@
         </div>
       </div>
     </section>
-    
+    {{#if hasError}}
+    <div class="alert-danger">
+        {{#each messages}}
+            <p>{{this}}</p>
+        {{/each}}
+    </div>
+    {{/if}}
     {{#if cartoUpdate}}
     <section class="ftco-section contact-section">
       <div class="container">
