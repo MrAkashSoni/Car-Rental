@@ -24,6 +24,7 @@
                 <input type="hidden" name="date" value="{{date}}" >
                 <input type="hidden" name="days" value="{{days}}" >
                 <input type="hidden" name="rentAmount" value="{{rentAmount}}" >
+              Your Total Amount to pay: {{rentAmount}}
               <div class="form-group">
                 <input type="text" name="cardHolderName" id="cardHolderName" class="form-control" placeholder="Card Holder Name" required>
               </div>
@@ -31,15 +32,16 @@
                 <input type="text" name="cardNumber" id="cardNumber" class="form-control" placeholder="Card Number" required>              
               </div>
               <div class="form-group">
-                <input type="number" name="expiryMonth" id="expiryMonth" class="form-control" placeholder="Expiry Month" required>
+                <input type="number" name="expiryMonth" id="expiryMonth" class="form-control" placeholder="Expiry Month" min="1" max="12" required>
               </div>
               <div class="form-group">
-                <input type="number" name="expiryYear" id="expiryYear" class="form-control" placeholder="Expiry Year" required>
+                <input type="number" name="expiryYear" id="expiryYear" class="form-control" placeholder="Expiry Year" min="2020" required>
               </div>
               <div class="form-group">
                 <input type="number" name="cvvNumber" id="cvvNumber" class="form-control" placeholder="CVV Number" required>
               </div>
               <div class="form-group">
+                Upload Licence Photo
                 <input type="file" name="licence" class="form-control" required accept="jpg/png/jpeg">
               </div>
               <input type="text" name="carId" value="{{id}}" style="display:none"><br><br>

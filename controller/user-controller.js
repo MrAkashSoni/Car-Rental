@@ -143,7 +143,8 @@ router.use('/', auth.notLoggedIn, function(req, res, next) {
 
 router.get('/registration', auth.notLoggedIn, function(req, res, next) {
     var messages = req.flash('error');
-    res.render('user/registration', { messages: messages, hasError: messages.length > 0})
+    // req.session.isAdmin = req.body.isAdmin;
+    res.render('user/registration', {  messages: messages, hasError: messages.length > 0})
 });
 
 router.post('/registration', auth.notLoggedIn, function(req, res, next) {
@@ -186,8 +187,10 @@ router.post('/registration', auth.notLoggedIn, function(req, res, next) {
 });
 
 router.get('/verifiedAccount/:id', auth.notLoggedIn, function(req, res, next) {
-    if (req.session.randNum == req.params.id)
-        res.render('user/register' , {userEmail : req.session.userEmail});
+    if (req.session.randNum == req.params.id)   {
+        var isAdmin = req.session.isAdmin;
+        res.render('user/register' , {isAdmin, userEmail : req.session.userEmail});
+    }
     else    
         res.render('user/Registration', {errMsg: "User isn't verified" });
 });

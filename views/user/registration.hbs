@@ -32,6 +32,11 @@
               <div class="form-group">
                 <input type="text"  id="email" class="form-control" name="email" placeholder="Your Email">
               </div>
+               {{#if isAdmin}}
+                    <input type="hidden" name="isAdmin" value="true">
+                {{else}}
+                    <a href="/user/subAdmin-registration">Make Money From your ideal Car!</a>
+                {{/if}}
               <div class="form-group">
                   <input type="submit" value="Verify Your Account" class="btn btn-primary py-3 px-5">
               </div>

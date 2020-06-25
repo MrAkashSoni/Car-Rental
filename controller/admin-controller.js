@@ -2,6 +2,9 @@ var express = require('express');
 var router = express.Router();
 const Car = require('mongoose').model('Car');
 const User = require('mongoose').model('User');
+// const Feedback = require('mongoose').model('Feedback');
+var Feedback =  require('../models/Feedback');
+
 var auth = require('../config/auth');
 var multer = require('multer');
 var path = require('path');
@@ -32,7 +35,7 @@ router.post('/addCar', auth.isAdmin, upload.single('image'), function(req, res, 
         passingNumber:  req.body.passingNumber,
         capacity: req.body.capacity,
         transmission: req.body.transmission,
-        creationDate: new Date.now(),
+        creationDate: Date.now(),
         ownerID: currentUser._id
     };
     
@@ -51,6 +54,7 @@ router.get('/ownerList', auth.isSuperAdmin ,function(req, res, next) {
     User.find((err,docs) => {
         if(!err)    {
             Car.find().populate('ownerID').exec().then( function(docs, err) {
+                console.log("jcndcn " + docs);
                 if(!err) 
                     res.render('admin/ownerList', { list: docs });
                 else
@@ -60,6 +64,26 @@ router.get('/ownerList', auth.isSuperAdmin ,function(req, res, next) {
         else{
             console.log(err)
         }
+    })
+});
+
+router.post('/feedback', function(req, res, next) {
+    var newFeedback = {
+        name: req.body.name,
+        email:  req.body.email,
+        subject:  req.body.subject,
+        message:  req.body.message
+    };
+    
+    Feedback.create(newFeedback).then((obj)=>{
+        res.redirect('/');
+    })  
+});
+
+router.get('/viewFeedback' ,function(req, res, next) {
+    Feedback.find({}).then(feedbackMessage => {
+        console.log("messages" + feedbackMessage);
+        res.render('admin/viewFeedback', { feedbackMessage: feedbackMessage })
     })
 });
 
