@@ -143,7 +143,6 @@ router.use('/', auth.notLoggedIn, function(req, res, next) {
 
 router.get('/registration', auth.notLoggedIn, function(req, res, next) {
     var messages = req.flash('error');
-    // req.session.isAdmin = req.body.isAdmin;
     res.render('user/registration', {  messages: messages, hasError: messages.length > 0})
 });
 
@@ -156,6 +155,8 @@ router.post('/registration', auth.notLoggedIn, function(req, res, next) {
                 pass: keys.gmail.password
             }
         });
+        if(req.body.isAdmin == true)
+            req.session.isAdmin = true;
         link = "http://" + req.get('host') + "/user/verifiedAccount/" + randNum;
         req.session.randNum = randNum;     
             User.findOne({email : req.body.email}, function(err,doc){
@@ -187,8 +188,9 @@ router.post('/registration', auth.notLoggedIn, function(req, res, next) {
 });
 
 router.get('/verifiedAccount/:id', auth.notLoggedIn, function(req, res, next) {
+    if(req.session.isAdmin == true)
+        var isAdmin = true;
     if (req.session.randNum == req.params.id)   {
-        var isAdmin = req.session.isAdmin;
         res.render('user/register' , {isAdmin, userEmail : req.session.userEmail});
     }
     else    

@@ -12,8 +12,7 @@
           </div>
         </div>
       </div>
-    </section>
-    {{#if errMsg}}
+      {{#if errMsg}}
     <div class="alert-danger">
         <p>{{errMsg}}</p>
     </div>
@@ -25,17 +24,19 @@
         {{/each}}
     </div>
     {{/if}}
+    </section>
+    
     <section class="ftco-section contact-section">
       <div class="container">
           <div class="col-md-8 block-9 mb-md-5">
               <form action="/user/registration" method="post">
               <div class="form-group">
-                <input type="text"  id="email" class="form-control" name="email" placeholder="Your Email">
+                <input type="text"  id="email" class="form-control" name="email" placeholder="Your Email" required>
               </div>
-               {{#if isAdmin}}
+                {{#if isAdmin}}
                     <input type="hidden" name="isAdmin" value="true">
                 {{else}}
-                    <a href="/user/subAdmin-registration">Make Money From your ideal Car!</a>
+                    <a href="/user/subAdmin-registration">Make Money From your ideal Car!</a></br>
                 {{/if}}
               <div class="form-group">
                   <input type="submit" value="Verify Your Account" class="btn btn-primary py-3 px-5">

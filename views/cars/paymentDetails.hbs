@@ -13,10 +13,11 @@
         </div>
       </div>
     </section>
-    <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
+    
+    <section class="ftco-section contact-section">
+      <div id="charge-error" class="alert alert-danger {{#if noError}}hidden{{/if}}">
             {{err}}
     </div>
-    <section class="ftco-section contact-section">
       <div class="container">
           <div class="col-md-8 block-9 mb-md-5">
             <form action="/cars/paymentDetails" method="POST" id="rentCar-form" enctype="multipart/form-data">

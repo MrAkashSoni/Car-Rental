@@ -81,7 +81,6 @@ passport.use('local.register', new LocalStrategy({
      });
 }));
 
-
 passport.use('local.login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',

@@ -41,8 +41,9 @@
               <div class="form-group">
                 <input type="password" id="password" class="form-control" name="password" placeholder="Your Password">
               </div>
-             
+              {{#if isAdmin}}
                <input type="hidden" value="isAdmin" name="isAdmin" >
+              {{/if}}
                 <div class="form-group">
                     <input type="submit" value="Register" class="btn btn-primary py-3 px-5">
                 </div>
