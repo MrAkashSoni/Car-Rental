@@ -9,7 +9,7 @@ const rentedCarSchema = new mongoose.Schema({
     date: { type:  Date, required: true },
     days: { type: Number, required: true },
     licence: { type: mongoose.Schema.Types.String, required: true },
-    paymentID: { type: mongoose.Schema.Types.String, required: true }
+    paymentID: { type: mongoose.Schema.Types.String }
 })
 
 const RentedCarInfo = mongoose.model('RentedCarInfo', rentedCarSchema);

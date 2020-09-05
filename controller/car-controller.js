@@ -75,34 +75,34 @@ router.post('/paymentDetails',auth.isLoggedIn, upload.single('licence'),  functi
     var days = req.body.days;
     let RentedCarInfoObj = {}   
 
-    var stripe = require('stripe')
-    ('sk_test_rTV467jvdYEGQ6lxtZLKzllQ00B0Qa1VWs');
+    // var stripe = require('stripe')
+    // ('sk_test_rTV467jvdYEGQ6lxtZLKzllQ00B0Qa1VWs');
 
-    stripe.charges.create(
-    {
-        amount: req.body.rentAmount,
-        currency: 'inr',
-        source: req.body.stripeToken,
-        description: 'Test Charge',
-    },
-    function(err, charge) {
-        if (err){
-            console.log(err.message);
-            return res.render('cars/paymentDetails', {err});
-        }
+    // stripe.charges.create(
+    // {
+    //     amount: req.body.rentAmount,
+    //     currency: 'inr',
+    //     source: req.body.stripeToken,
+    //     description: 'Test Charge',
+    // },
+    // function(err, charge) {
+    //     if (err){
+    //         console.log(err.message);
+    //         return res.render('cars/paymentDetails', {err});
+    //     }
         Car.findById(id).then(foundCar => {
             User.findById(userId).then(user => {
                 user.rentedCars.push(foundCar._id)
                 user.save().then(()=>{
-                    foundCar.isRented = true
+                    // foundCar.isRented = true
                     foundCar.save().then(()=>{
                         RentedCarInfoObj={
                             car: foundCar._id,
                             user: userId,
                             date: date,
                             days: days,
-                            licence: req.file.filename,
-                            paymentID : charge.id
+                            licence: req.file.filename
+                            // paymentID : charge.id
                         }
                         console.log(RentedCarInfoObj)
                         RentedCarInfo.create(RentedCarInfoObj).then(()=>{
@@ -113,7 +113,7 @@ router.post('/paymentDetails',auth.isLoggedIn, upload.single('licence'),  functi
             })
         })
     });
-});
+// });
 
 router.get('/editPrice/:id', auth.isLoggedIn, auth.isAdmin ,function(req, res, next) {
     let id = req.params.id
