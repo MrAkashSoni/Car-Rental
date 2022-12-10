@@ -15,7 +15,7 @@
     "crypto": "^1.0.1",
     "csurf": "^1.11.0",
     "debug": "~2.6.9",
-    "express": "~4.16.1",
+    "express": "~4.17.3",
     "express-handlebars": "^3.1.0",
     "express-passport": "^0.1.0",
     "express-session": "^1.17.0",
