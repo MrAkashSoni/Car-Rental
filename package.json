@@ -23,7 +23,7 @@
     "handlebars": "^4.5.3",
     "hbs": "^4.1.1",
     "http-errors": "~1.6.3",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "local-storage-pro": "^1.1.1",
     "localstorage": "^1.0.1",
     "mongoose": "^5.9.1",
